@@ -94,5 +94,30 @@ export const Schemas = {
                 .optional(),
             index: Joi.number().integer().min(0).optional()
         }).min(1)
+    },
+
+    Question: {
+        create: Joi.object({
+            title: Joi.string().required(),
+            description: Joi.string().allow('').optional(),
+            pointId: Joi.string()
+                .pattern(/^[0-9a-fA-F]{24}$/)
+                .required()
+        }),
+
+        update: Joi.object({
+            title: Joi.string().optional(),
+            description: Joi.string().allow('').optional(),
+            pointId: Joi.string()
+                .pattern(/^[0-9a-fA-F]{24}$/)
+                .optional()
+        }).min(1),
+
+        addAnswer: Joi.object({
+            text: Joi.string().required(),
+            userId: Joi.string()
+                .pattern(/^[0-9a-fA-F]{24}$/)
+                .required()
+        })
     }
 };

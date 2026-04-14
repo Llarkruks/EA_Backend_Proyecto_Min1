@@ -8,25 +8,18 @@ const options: Options = {
         info: {
             title: 'EA Proyecto',
             version: '1.0.0',
-            description: 'Users REST API'
+            description: 'API para gestionar rutas, puntos, usuarios y preguntas'
         },
         servers: [
             {
                 url: `http://localhost:${config.server.port}`
             }
-        ],
-        components: {
-            securitySchemes: {
-                bearerAuth: {
-                    type: 'http',
-                    scheme: 'bearer',
-                    bearerFormat: 'JWT'
-                }
-            }
-        }
+        ]
     },
-
-    apis: [path.join(__dirname, 'routes', '*.js')]
+    apis: [
+        path.join(process.cwd(), 'src/routes/*.ts'),
+        path.join(process.cwd(), 'build/routes/*.js')
+    ]
 };
 
 export const swaggerSpec = swaggerJSDoc(options);
